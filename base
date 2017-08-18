@@ -1,0 +1,27 @@
+#!/bin/bash
+########################
+#description: TODO 脚本说明
+#create_by:
+#######################
+SCRIPT_HOME=$(cd $(dirname $0);pwd)
+SCRIPT_NAME=$0
+TIME_D=$(date +%Y%m%d)
+TIME_T=$(date +'%H%M%S')
+#######################
+while getopts a:b:c: ARG
+do
+    case $ARG in
+    a)
+        echo "a=:$OPTARG" #参数存在$optarg中
+    ;;
+    b)
+        echo "b=$OPTARG"
+    ;;
+    c)
+        echo "c=$OPTARG"
+    ;;
+    ?)  #当有不认识的选项的时候arg为?
+        echo "unkonw argument=$optarg"
+    exit 1
+esac
+done
