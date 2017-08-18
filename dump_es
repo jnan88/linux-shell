@@ -1,0 +1,33 @@
+#!/bin/bash
+es_index=
+es_http=127.0.0.1:9200
+bk_home=/opt/backups
+
+
+exit 2
+# 数据导出
+function bk_setting(){
+    es-export-settings --url http://${es_http} --file ${bk_home}/es/settings.json
+}
+function bk_mappings(){
+    es-export-mappings --url http://${es_http} --file ${bk_home}/es/mappings.json
+}
+function bk_aliases(){
+    es-export-aliases --url http://${es_http} --file ${bk_home}/es/aliases.json
+}
+function bk_index(){
+    es-export-bulk --url http://${es_http} --file ${bk_home}/es/index_${es_index}.json --index ${es_index}
+}
+# 数据导入
+function rbk_setting(){
+    es-import-settings --url http://${es_http} --file ${bk_home}/es/settings.json
+}
+function rbk_mappings(){
+    es-import-mappings --url http://${es_http} --file ${bk_home}/es/mappings.json
+}
+function rbk_index(){
+    es-import-bulk --url http://${es_http} --file ${bk_home}/es/index_${es_index}.json
+}
+function rbk_aliases(){
+    es-import-aliases --url http://${es_http} --file ${bk_home}/es/aliases.json
+}
